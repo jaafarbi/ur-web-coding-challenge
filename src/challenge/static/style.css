@@ -1,0 +1,9 @@
+html, body{
+  height: 100%;
+}
+
+.vcenter{
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
+}
