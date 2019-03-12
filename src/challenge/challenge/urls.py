@@ -16,11 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from users.views import user_signin, user_signup, user_signout
+from shops.views import shop_nearby, shop_liked, shop_like, shop_dislike, shop_remove
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', user_signin),
     path('signup',user_signup),
     path('signout',user_signout),
+    path('shops',shop_nearby),
+    path('preferred_shops',shop_liked),
+    path('like_shop/<int:id_shop>',shop_like),
+    path('dislike_shop/<int:id_shop>',shop_dislike),
+    path('remove_shop/<int:id_shop>',shop_remove),
+
 
 ]

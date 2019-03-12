@@ -1,76 +1,114 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    {% load static %}
-    <title>Web Coding Challenge</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <div class="container" style="height: 100%;">
+<head>
+  {% load static %}
+  <title>Web Coding Challenge</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container" style="height: 100%;">
 
-      <!--IF USER NOT SIGNED IN-->
-      {% if not request.user.is_authenticated %}
-      <div class="row justify-content-center">
-        <div class="col-md-4">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <!-- TEST IF SIGNUP OPERATION IS COMPLETED -->
-              {% if not signup_complete %}
-              <form method="POST"> {% csrf_token %}
-                <div class="form-group">
-                  <label>Email address</label>
-                  <input type="email" name="email" class="form-control" placeholder="Enter email" required>
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
-                </div>
-                {% if signup %}
-                <div class="form-group">
-                  <label>Confirm Password</label>
-                  <input type="password" class="form-control" placeholder="Re-type password" id="confirm_password" required>
-                </div>
-                <script>
-                var password = document.getElementById("password")
-                , confirm_password = document.getElementById("confirm_password");
+    <!--IF USER NOT SIGNED IN-->
+    {% if not request.user.is_authenticated %}
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <!-- TEST IF SIGNUP OPERATION IS COMPLETED -->
+            {% if not signup_complete %}
+            <form method="POST"> {% csrf_token %}
+              <div class="form-group">
+                <label>Email address</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+              </div>
+              {% if signup %}
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Re-type password" id="confirm_password" required>
+              </div>
+              <script>
+              var password = document.getElementById("password")
+              , confirm_password = document.getElementById("confirm_password");
 
-                function validatePassword(){
-                  if(password.value != confirm_password.value) {
-                    confirm_password.setCustomValidity("Passwords are not the same!");
-                  } else {
-                    confirm_password.setCustomValidity('');
-                  }
+              function validatePassword(){
+                if(password.value != confirm_password.value) {
+                  confirm_password.setCustomValidity("Passwords are not the same!");
+                } else {
+                  confirm_password.setCustomValidity('');
                 }
+              }
 
-                password.onchange = validatePassword;
-                confirm_password.onkeyup = validatePassword;
-                </script>
-                {% endif %}
-                {% if not signup %}
-                <button type="submit" class="btn btn-primary">Sign in</button>
-                <a href="signup" class="btn btn-secondary">Sign up</a>
-                {% else %}
-                <button type="submit" class="btn btn-primary">Confirm</button>
-                {% endif %}
-              </form>
-              {% else %}
-              <p class="card-text">Sign Up completed</p>
-              <a href="/" class="btn btn-primary">Go back</a>
+              password.onchange = validatePassword;
+              confirm_password.onkeyup = validatePassword;
+              </script>
               {% endif %}
-            </div>
+              {% if not signup %}
+              <button type="submit" class="btn btn-primary">Sign in</button>
+              <a href="signup" class="btn btn-secondary">Sign up</a>
+              {% else %}
+              <button type="submit" class="btn btn-primary">Confirm</button>
+              {% endif %}
+            </form>
+            {% else %}
+            <p class="card-text">Sign Up completed</p>
+            <a href="/" class="btn btn-primary">Go back</a>
+            {% endif %}
           </div>
         </div>
       </div>
-      {% else %}
-      <h1>Hello to the Shops</h1>
-      <a href="signout" class="btn btn-primary">Sign out</a>
-      {% endif %}
     </div>
+    {% else %}
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Web Coding Challenge</a>
+        </div>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a href="/shops" class="nav-link {{ shops_active }}">Nearby shops</a>
+          </li>
+          <li class="nav-item">
+            <a href="/preferred_shops" class="nav-link {{ preferred_shops_active }}">Preferred shops</a>
+          </li>
+        </ul>
+        <p class="nav navbar-nav">Signed as {{ request.user.email }}</p>
+        <a href="signout" class="btn btn-danger">Sign out</a>
+      </div>
+    </nav>
+
+    {% for shops in group_4_shops %}
+    <div class="row justify-content-center top-margin">
+      {% for shop in shops %}
+      <div class="col-md-3">
+        <div class="card">
+          <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card Img Shop">
+          <div class="card-body">
+            <h3 class="card-title">{{ shop.name }}</h3>
+            <p class="card-text">{{ shop.description }}</p>
+            {% if shops_active %}
+            <a href="/like_shop/{{ shop.id }}" class="btn btn-success">Like</a>
+            <a href="/dislike_shop/{{ shop.id }}" class="btn btn-danger">Dislike</a>
+            {% elif preferred_shops_active %}
+            <a href="/remove_shop/{{ shop.id }}" class="btn btn-danger">Remove</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+      {% endfor %}
+      {% endif %}
+
   </body>
 
-</html>
+  </html>
