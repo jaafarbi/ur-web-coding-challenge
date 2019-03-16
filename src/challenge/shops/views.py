@@ -15,7 +15,7 @@ def shop_nearby(request):
     if not request.user.is_authenticated:
         return redirect("/")
 
-    shops = Shop.all_but_liked_by(request.user)
+    shops = Shop.shops_to_be_displayed_nearby(request.user)
     group_4_shops = split_n_items_per_part(shops, 4)
 
     context = {

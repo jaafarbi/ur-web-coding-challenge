@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
-
 def default_time_now():
     return datetime.datetime.time(datetime.datetime.now())
 # Create your models here.
@@ -35,6 +34,9 @@ class Shop(models.Model):
         # Perfom like by user on the shop
         self.liked_by_users.add(user)
 
+    def shops_to_be_displayed_nearby(user):
+        return Shop.objects.exclude(liked_by_users=user).exclude(disliked_by_users=user)
+
     def remove_like_by(self, user):
         # Remove the like by user from the shop
         self.liked_by_users.remove(user)
@@ -58,19 +60,18 @@ class Shop(models.Model):
         # Perfom dislike by user on the shop
         if DislikedShop.objects.filter(users=user, shops=self).count() == 0:
             DislikedShop.objects.create(users=user, shops=self)
-        else:
-            DislikedShop.objects.filter(users=user, shops=self).update(date_disliked=default_time_now())
-        # remove_disliked_shop.apply_async((self.id, user.id), countdown=10)
+            from .tasks import remove_dislike_async
+            remove_dislike_async.apply_async((self.id, user.id), countdown=DislikedShop.amount_time_disapear_in_s)
 
     def remove_dislike_by(self, user):
         # Remove the dislike by user from the shop
         if DislikedShop.objects.filter(users=user, shops=self).count() > 0:
-            DislikedShop.objects.remove(users=user, shops=self)
+            DislikedShop.objects.filter(users=user, shops=self).delete()
 
 
 
 class DislikedShop(models.Model):
-    amount_time_disapear_in_s = 3600*2
+    amount_time_disapear_in_s = 3600
     users = models.ForeignKey(User, on_delete=models.CASCADE)
     shops = models.ForeignKey(Shop, on_delete=models.CASCADE)
     date_disliked = models.TimeField(default=default_time_now, null=False, blank=False)
