@@ -15,11 +15,13 @@ I completed the coding challenge by using Python 3.7 and some libraries:
 * Ability to remove a shop from the preferred shops list.
 
 ## Database Structure
-![Database Structure](/tables.png)
+![Database Structure](/tables.png)  
+
+
 I used the model User from the django library as the User table, created the model Shop in which I added a simple M2M relationship to User (here represented as LikedShop) and finally added another M2M relationship to User through the model DislikedShop with an extra filed *date_disliked*.
 
 
-
-TODO: Use AJAX to refresh the list of shops when liked/disliked.
-TODO: Comment/Document code.
-TODO: Put more effort on the page design.
+## What's next?
+* Use AJAX to refresh the list of shops when liked/disliked.  
+* Comment/Document code.  
+* Put more effort on the page design.
