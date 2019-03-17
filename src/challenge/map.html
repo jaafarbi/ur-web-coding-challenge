@@ -1,0 +1,320 @@
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps - pygmaps </title>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false"></script>
+<script type="text/javascript">
+	function initialize() {
+		var centerlatlng = new google.maps.LatLng(34.033958, -5.005365);
+		var myOptions = {
+			zoom: 13,
+			center: centerlatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+		var latlng = new google.maps.LatLng(-74.711615, 81.778605);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 1",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-113.896103, 83.205334);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 2",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(94.598516, -89.251318);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 3",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(105.686098, -38.045079);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 4",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(159.341477, 0.796329);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 5",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(166.554766, -35.258154);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 6",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-96.757732, -61.275872);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 7",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(112.821131, 83.153191);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 8",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(88.087673, 68.783569);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 9",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-62.636953, -6.279313);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 10",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(45.175201, 75.418231);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 11",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(70.204472, -65.829142);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 12",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-118.734785, 21.204907);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 13",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-148.300946, -67.847482);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 14",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(7.849638, 18.536561);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 15",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(154.836211, -83.946388);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 16",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(29.785282, -30.178235);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 17",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(173.484393, 74.068582);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 18",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(74.534983, -23.193769);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 19",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-168.616673, 57.906202);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 20",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(66.691497, 0.923191);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 21",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-51.826067, -1.828806);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 22",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(79.813851, 58.008192);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 23",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(94.483280, 43.047183);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 24",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(84.935528, -30.575661);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 25",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(77.160195, -7.875613);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 26",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-26.490716, -63.463808);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 27",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(91.313216, 18.305412);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 28",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(97.335230, 68.009194);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 29",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-127.580978, -88.111108);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 30",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(111.185761, 11.193804);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 31",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-50.169113, 85.922804);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 32",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+		var latlng = new google.maps.LatLng(-1.497964, -64.708601);
+		var img = new google.maps.MarkerImage('http://www.googlemapsmarkers.com/v1/FF0000/');
+		var marker = new google.maps.Marker({
+		title: "Shop 33",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
+	}
+</script>
+</head>
+<body style="margin:0px; padding:0px;" onload="initialize()">
+	<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+</body>
+</html>

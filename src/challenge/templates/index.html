@@ -66,8 +66,57 @@
         </div>
       </div>
     </div>
+    <!--IF USER SIGNED IN-->
     {% else %}
+    {% if ask_for_position %}
+      <script>
+      $(document).ready(function(){
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(sendPosition);
+        }else {
+          console.log("Geolocation is not supported!");
+        }
 
+        function sendPosition(position){
+          $.ajaxSetup({
+               beforeSend: function(xhr, settings) {
+                   function getCookie(name) {
+                       var cookieValue = null;
+                       if (document.cookie && document.cookie != '') {
+                           var cookies = document.cookie.split(';');
+                           for (var i = 0; i < cookies.length; i++) {
+                               var cookie = jQuery.trim(cookies[i]);
+                               // Does this cookie string begin with the name we want?
+                               if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                   break;
+                               }
+                           }
+                       }
+                       return cookieValue;
+                   }
+                   if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                       // Only send the token to relative URLs i.e. locally.
+                       xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                   }
+               }
+          });
+          $.ajax({
+            type: 'POST',
+            url: '/shops',
+            data: 'lat=' + position.coords.latitude + '&long=' + position.coords.longitude,
+            success: function(msg){
+              console.log(msg);
+              $("#list_shops").fadeOut(500,function(){
+                $("#list_shops").html($("#list_shops",$(msg))).fadeIn();
+              });
+            },
+            dataType: "html"
+          });
+        }
+      });
+      </script>
+    {% endif %}
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -86,27 +135,29 @@
       </div>
     </nav>
 
-    {% for shops in group_4_shops %}
-    <div class="row justify-content-center top-margin">
-      {% for shop in shops %}
-      <div class="col-md-3">
-        <div class="card">
-          <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card Img Shop">
-          <div class="card-body">
-            <h3 class="card-title">{{ shop.name }}</h3>
-            <p class="card-text">{{ shop.description }}</p>
-            {% if shops_active %}
-            <a href="/like_shop/{{ shop.id }}" class="btn btn-success">Like</a>
-            <a href="/dislike_shop/{{ shop.id }}" class="btn btn-danger">Dislike</a>
-            {% elif preferred_shops_active %}
-            <a href="/remove_shop/{{ shop.id }}" class="btn btn-danger">Remove</a>
-            {% endif %}
+    <div id="list_shops">
+      {% for shops in group_4_shops %}
+      <div class="row justify-content-center top-margin">
+        {% for shop in shops %}
+        <div class="col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="https://via.placeholder.com/150" alt="Card Img Shop">
+            <div class="card-body">
+              <h3 class="card-title">{{ shop.name }}</h3>
+              <p class="card-text">{{ shop.description }}</p>
+              {% if shops_active %}
+              <a href="/like_shop/{{ shop.id }}" class="btn btn-success">Like</a>
+              <a href="/dislike_shop/{{ shop.id }}" class="btn btn-danger">Dislike</a>
+              {% elif preferred_shops_active %}
+              <a href="/remove_shop/{{ shop.id }}" class="btn btn-danger">Remove</a>
+              {% endif %}
+            </div>
           </div>
         </div>
+        {% endfor %}
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-      </div>
-      {% endfor %}
       {% endif %}
 
   </body>

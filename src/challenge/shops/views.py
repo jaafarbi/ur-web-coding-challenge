@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Shop
 
+
+from math import cos, asin, sqrt
+def distance(lat1, lon1, lat2, lon2):
+    p = 0.017453292519943295     #Pi/180
+    a = 0.5 - cos((lat2 - lat1) * p)/2 + cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2
+    return 12742 * asin(sqrt(a)) #2*R*asin..
+
 #Split list in approx. n per list
 def split_n_items_per_part(the_list, n):
     n_complete_parts = int(len(the_list)/n)
@@ -16,12 +23,25 @@ def shop_nearby(request):
         return redirect("/")
 
     shops = Shop.shops_to_be_displayed_nearby(request.user)
+    context = {}
+    context["shops_active"] = "active"
+    context["ask_for_position"] = True
+
+    if request.POST:
+        latitude = float(request.POST.get("lat",""))
+        longitude = float(request.POST.get("long",""))
+        request.session["latitude"] = latitude
+        request.session["longitude"] = longitude
+        context["ask_for_position"] = False
+
+    if "latitude" in request.session and "longitude"in request.session:
+        context["ask_for_position"] = False
+        shops = sorted(list(shops), key=lambda x: distance(request.session["latitude"], request.session["longitude"], x.latitude, x.longitude))
+
     group_4_shops = split_n_items_per_part(shops, 4)
 
-    context = {
-        "group_4_shops": group_4_shops,
-        "shops_active": "active"
-    }
+    context["group_4_shops"] = group_4_shops
+
     return render(request, 'index.html', context)
 
 def shop_liked(request):
